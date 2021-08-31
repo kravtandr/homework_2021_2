@@ -8,7 +8,6 @@ function solve (expression, arg){
     if (expression == ''|| expression == undefined || isNaN(arg)) {
         return NaN;
     }
-    let a, op, b;
     expression = expression.replace(/x/g, arg);
 
     while(expression.indexOf(")") >= 0){
@@ -17,9 +16,9 @@ function solve (expression, arg){
         let operation = expression.slice(leftBracketPos+1, rightBracketPos);
 
         let parsedOperation = parseOperation(operation);
-        a = +parsedOperation.a;
-        op = parsedOperation.operator;
-        b = +parsedOperation.b;
+        let a = +parsedOperation.a;
+        let op = parsedOperation.operator;
+        let b = +parsedOperation.b;
         parsedOperation = parsedOperation.parsedOperation;
 
         if(parsedOperation.length==1 && !isNaN(parsedOperation[0])){
@@ -34,9 +33,9 @@ function solve (expression, arg){
 
     expression = formatOperation(expression);
     while(expression.length>=3){
-        a = +expression[0]
-        op = expression[1];
-        b = +expression[2];
+        let a = +expression[0]
+        let op = expression[1];
+        let b = +expression[2];
 
         if(!isNaN(checkOperation(a, op, b))) return;
 
