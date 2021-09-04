@@ -47,7 +47,6 @@ const checkOperation = (a, op, b) => {
         return true;
     }
     return false;
-
 }
 
 /** 
