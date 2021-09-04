@@ -6,7 +6,7 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('2 + x - 1', 5), 6);
 		assert.strictEqual(solve('2 * x - 1', 5), 9);
 		assert.strictEqual(solve('2 * ( x - 1 )', 5), 8);
-		assert.strictEqual(solve('(5 - x) * (x + 5)', 3), 16);
+		assert.strictEqual(solve('( 5 - x ) * ( x + 5 )', 3), 16);
 		assert.strictEqual(solve('((5 - x) * (x + 5)) * x * x', 3), 144);
 	});
 });
