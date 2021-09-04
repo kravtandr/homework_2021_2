@@ -75,7 +75,7 @@ const evaluateFromPostfix = (expression) => {
  * @returns {(number|string)} - postfix expression array
  */
 const ExpressionToPostfix = (expression) => {
-    let postfix = expression.reduce((acc, item, index, arr) => {
+    let postfix = expression.reduce((acc, item) => {
         if (item.match(/[0-9]+/)) {
             acc.postfixExpression.push(item);
         }
