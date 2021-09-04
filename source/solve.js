@@ -57,7 +57,7 @@ const checkOperation = (a, op, b) => {
 const evaluateFromPostfix = (expression) => {
     return expression.reduce((stack,item) => {
         if (item in methods) {
-            let [b, a] = [stack.pop(), stack.pop()];
+            const [b, a] = [stack.pop(), stack.pop()];
             if(isNaN(checkOperation(a, item, b))) return;
             stack.push(methods[item].func(a, b));
         } else {
