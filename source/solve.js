@@ -50,7 +50,6 @@ const checkOperation = (a, op, b) => {
 
 }
 
-
 /** 
  * evaluate postfix expression 
  * @param {String} expression - postfix expression string
@@ -76,41 +75,26 @@ const evaluateFromPostfix = (expression) => {
  * @returns {(number|string)} - postfix expression array
  */
 const ExpressionToPostfix = (expression) => {
-    let stack = [];
-    let postfixExpression = [];
-    expression.forEach((item) => {
+    let postfix = expression.reduce((acc, item, index, arr) => {
         if (item.match(/[0-9]+/)) {
-            postfixExpression.push(item);
+            acc.postfixExpression.push(item);
         }
         if (item == '(') {
-            stack.push(item);
+            acc.stack.push(item);
         }
         if (item == ')') {
-            while (stack[stack.length - 1] != '(') {
-                postfixExpression.push(stack.pop());
+            while (acc.stack[acc.stack.length - 1] != '(') {
+                acc.postfixExpression.push(acc.stack.pop());
             }
-            
-            stack.pop();
-
-            // stack.reduce((currentValue) => {
-            //     if(currentValue != '('){
-            //         postfixExpression.push(currentValue)
-            //     }
-            // });
-            // stack.pop();
+            acc.stack.pop();
         }
         if (item in methods) {
-            while (stack.length > 0 && stack[stack.length - 1] in methods && methods[stack[stack.length - 1]].priority <= methods[item].priority) {
-               postfixExpression.push(stack.pop());
+            while (acc.stack !== undefined && acc.stack[acc.stack.length - 1] in methods && methods[acc.stack[acc.stack.length - 1]].priority <= methods[item].priority) {
+                acc.postfixExpression.push(acc.stack.pop());
             }
-            stack.push(item);
+            acc.stack.push(item);
         }
-    })
-    stack.forEach((item => {
-        postfixExpression.push(stack.pop());
-    }))
-    console.log(postfixExpression, stack)
-    return postfixExpression;
+        return acc;
+    },{postfixExpression: [], stack: []})
+    return postfix.stack.concat(postfix.postfixExpression, postfix.stack);
 };
-
-//console.log(solve('((5 - x) * (x + 5)) * x * x',3))
